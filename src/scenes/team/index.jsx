@@ -155,7 +155,8 @@ const Team = (props) => {
     fetchBook()
     fetchUser()
     
-  }, [])
+  });
+
   useEffect(() => {
     if (searchValue === '') {
       axios.get(`http://localhost:5000/`).then(res => {
@@ -167,7 +168,7 @@ const Team = (props) => {
     } else {
       
     }
-  }, [searchValue])
+  }, [searchValue]);
 
   return (
     <div className="app">

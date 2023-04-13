@@ -1,17 +1,12 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
-import LineChart from "../../components/LineChart";
-import GeographyChart from "../../components/GeographyChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
 import Sidebar from "../../scenes/global/Sidebar";
 import { useState, useEffect } from "react";
 import '../../styles/HomePage.css';
@@ -19,10 +14,6 @@ import imgSrc1 from '../../images/mainPage/book1.jpg'
 import imgSrc2 from '../../images/mainPage/book2.jpg'
 import imgSrc3 from '../../images/mainPage/book3.jpg'
 import imgSrc4 from '../../images/mainPage/book4.jpg'
-import imgSrc5 from '../../images/mainPage/book5.jpg'
-import imgSrc6 from '../../images/mainPage/book6.jpg'
-import imgSrc7 from '../../images/mainPage/book7.jpg'
-import imgSrc8 from '../../images/mainPage/book8.jpg'
 import axios from "axios"
 
 const Dashboard = () => {
@@ -32,7 +23,7 @@ const Dashboard = () => {
   const [user, setUser] = useState([])
 
   function fetchUser() {
-    axios.get("http://w22g7.int3306.freeddns.org/my_account", {
+    axios.get("http://localhost:5000/my_account", {
       params: { 'state': localStorage.getItem('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -40,7 +31,7 @@ const Dashboard = () => {
       },
     })
       .then((res) => {
-        if (res.status == 203) {
+        if (res.status === 203) {
           
         }
         else {

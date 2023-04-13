@@ -1,9 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Form from "./scenes/form";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from "./theme"
+import { ColorModeContext, useMode } from "./theme";
 import HomePage from "./scenes/HomePage";
 import Header from "./scenes/Header";
 import Footer from "./scenes/Footer";
@@ -16,7 +17,14 @@ import Accounts from "./scenes/Accounts";
 import Author from "./scenes/Author";
 import DeleteBook from "./scenes/deletebook";
 function App() {
-  const [theme, colorMode] = useMode();
+  const [theme, colorMode] = useMode();  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/home', { replace: true });
+    }, 300);
+  });
 
   return (
     <ColorModeContext.Provider value={colorMode}>

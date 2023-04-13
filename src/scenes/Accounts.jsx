@@ -150,7 +150,7 @@ const Account = (props) => {
     fetchUser()
     return () => {
     }
-  }, [])
+  });
 
   if (!user) {
     return <>loading</> //loading
@@ -257,7 +257,7 @@ const Account = (props) => {
                             <Icon icon={trashO} />
                           </button>
                         </div>
-                        <a className='no-underline book' href={``} target="_blank">
+                        <div className='no-underline book'>
                           <img
                             src={book.cover}
                             class="w-100 h-100"
@@ -272,7 +272,7 @@ const Account = (props) => {
                             {/* http://localhost:5000/book/book_id */}
                             <Rating name="half-rating" value={book.current_rating} precision={1} />
                           </div>
-                        </a>
+                        </div>
                         <h1 className='fs-4 text-center'>{book.title}</h1>
                       </div>
                     ))}
