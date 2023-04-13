@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#wrapper {
+    max-width: 1300px;
+    margin: 90px auto 0px;
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+.search-field {
+    display: flex;
+    margin-left: 8px;
+    flex-wrap: nowrap;
+}
+ul.products {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0;
+    /* gap: calc(12%/3); */
+}
+ul.products li {
+    flex-basis: 20%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+}
+ul.products li img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.product-info {
+    padding: 5px 0px;
+}
+.product-info a {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+.product-info a.product-name {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: #dbdbdb;
+    padding: 3px 0px;
+}
+.product-info a.product-author {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    color: #7a7a7a;
+    padding: 3px 0px;
+}
+.is-medium.input {
+    display: block;
+    font-size: 1.25rem;
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 99%;
+    width: 100%;
+    border: 1px solid transparent;
+}
+.is-medium.input:focus {
+    outline: 0;
+    border: 1px solid #428bca;
+}
+.is-medium.input::placeholder {
+    color: #C0C0C0;
+    font-size: 20px;
+}
+@media screen and (min-width:1024px) and (max-width:1300px) {
+    ul.products li {
+        flex-basis: 25%;
+    }
+    #wrapper {
+        margin: 90px 40px 0px;
+    }
+}
+@media screen and (min-width:769px) and (max-width:1023px) {
+    ul.products li {
+        flex-basis: 33.33%;
+    }
+}
+@media screen and (max-width:768px) {
+    ul.products li {
+        flex-basis: 50%;
+    }
+}
+.icon-margin{
+    margin-left: 4px;
+    margin-top: 10px;
+}
+.fs-y::before{
+    font-size: 20px;
+  }
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.product-top {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-rating {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    padding: 1rem;
+    max-height: 100%;
+    transition: transform 0.3s linear;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.product-thumb:hover .product-rating {
+    transform: translateY(0%);
+}

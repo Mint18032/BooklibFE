@@ -1,0 +1,73 @@
+.note {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: inset -6px -4px 2px rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.326);
+    color: #fff;
+    padding: 15px;
+    position: fixed;
+    top: 30%;
+    min-height: 140px;    
+    left: 5%;
+    width: 20%;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    word-wrap: break-word;
+}
+
+.note__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.note textarea {
+    white-space: pre-wrap;
+    background: transparent;
+    border: none;
+    color: #fff;
+    resize: none;
+    font-size: medium;
+}
+
+.note textarea:focus {
+    outline: none;
+}
+
+.note textarea::placeholder {
+    color: #fff;
+    font-size: medium;
+}
+
+.note__save {
+    background: transparent;
+    transition: 0.1s ease-in-out;
+    border: 1.5px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.note__save:hover {
+    background: #fff;
+    border: 1.5px solid #fff;
+    color: #4b1589;
+}
+
+.note__delete {
+    cursor: pointer;
+}
+
+.note__delete:hover {
+    transform: scale(1.1);
+}
+
+.char__progress {
+    background-color: #fff!important;
+}

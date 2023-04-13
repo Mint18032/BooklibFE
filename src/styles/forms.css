@@ -1,0 +1,181 @@
+.container {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    margin-top: 50px;
+}
+
+.overlay {    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: #06121e;
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+}
+
+.overlay:target {
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    opacity: 1;
+    z-index: 30;
+}
+
+form {
+    width: 30%;
+}
+
+.box {
+    background-color: #363636;
+    border-radius: 6px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.item {
+    width: 90%;
+    height: 60px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+}
+
+.title {
+    font-size: 32px;
+    margin: 20px 0px;
+    font-weight: bold;
+}
+
+.has-text-grey {
+    color: #7a7a7a !important
+}
+
+.input {
+    margin-bottom: 15px;
+    font-size: 23px;
+    padding-left: 20px;
+    color: #363636;
+}
+
+.input:focus {
+    outline: 0;
+    border: 1px solid #428bca;
+}
+
+.button {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.is-signin {
+    margin-top: 40px;
+    background-color: #3E8ED0;
+}
+
+.is-signin:hover {
+    background-color: #3488ce;
+}
+
+.is-signupGG:hover {
+    background-color: #c41f20;
+}
+
+.is-signupGG {
+    background-color: #CF2122;
+}
+
+.has-text-right {
+    text-align: right !important;
+    font-size: 16px;	
+    margin: 10px 0px;
+}
+
+.container a {
+    text-decoration: none;
+    color: #428BCA;
+}
+
+.container a:hover {
+    color: #dcf836;
+}
+
+.container i {
+    margin-right: 20px;
+}
+
+::placeholder {
+    font-size: 22px;
+    text-align: left;
+    color: #BBBBBB;
+}
+
+.is-divider {
+    width: 90%;
+    text-align: center;
+    font-size: 12px;
+    color: #555555;
+    margin: 20px auto;
+    position: relative;
+}
+
+.is-divider span {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+.is-divider::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.field {
+    position: relative;
+}
+
+.field span {
+    position: absolute;
+    color: #000000;
+    top: 27%;
+    right: 5%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1195px) {
+    form {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    form {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    form {
+        width: 100%;
+        margin: auto 40px;
+    }
+}

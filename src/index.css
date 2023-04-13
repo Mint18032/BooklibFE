@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.content1 {
+  margin-left: 8%;
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.app {
+  display: flex;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.side{
+  height: 200%;
+}
+.side-team{
+  height:90%
+}
+a{
+  text-decoration: none;
+}
+
+.book {
+  position: relative;
+  height: 80%;
+  overflow-y: hidden;
+  display: block;
+}
+
+.rating {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  transform: translateY(101%);
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s linear;
+}
+
+.book:hover .rating {
+  transform: translateY(0);
+}
+.flex-main{
+  display: flex;
+}

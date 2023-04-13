@@ -1,0 +1,243 @@
+input#coll-name {
+    margin-left: 5px;
+}
+
+.bookDetails {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+.bookDetails h2 {
+    margin-left: 0;
+    letter-spacing: 2px;
+    font-weight: bolder;
+}
+
+.rating-stars {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: large;
+}
+
+.bookDetails
+.rating-stars:hover {
+    color: white;
+}
+
+.checked-star {
+  color: yellow;
+}
+
+.large-cover {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    background-image: linear-gradient(#06121e8f, #06121e8f), url("../images/bookdetailbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
+
+.book-view-container {
+    position: relative;
+    color: white;
+    display: flex;
+    top: -250px;
+    width: 100%;
+    padding: 0 2rem;
+    height: max-content;
+    z-index: 10;
+}
+
+.column {
+    display: block;
+    padding: 2.5rem;
+}
+
+.book-view-left {
+    flex: 1;
+    float: left;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-view-right {
+    width: 75%;
+    float: right;
+}
+
+.book-cover {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.book-cover img {
+    width: 100%;
+    border-image-repeat: no-repeat;
+}
+
+.book-name-translated {
+    color: #b5b5b5;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.average-rating-point {
+    display: inline;
+    color: white;
+    font-size: large;
+}
+
+.book-details-table {
+    margin-top: 10vh;
+    line-height: 3vh;
+    font-size: 110%;
+}
+
+.book-details-table th {
+    float: left;
+    font-weight: 100;
+    color: #7a7a7a;
+}
+
+.book-details-table td {
+    color: #dbdbdb;
+}
+
+.book-details-table a.author-link {
+    text-decoration: none;
+    color: #dbdbdb;
+    cursor: pointer;
+}
+
+.genre-tag:hover {
+    color: var(--color);
+}
+
+.book-details-table a.author-link:hover {
+    color: var(--bs-link-color);
+}
+
+.book-description {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    font-size: 110%;
+    color: #b5b5b5;
+}
+
+a.genre-tag {
+    text-align: center;
+    text-decoration: none;
+    color: #dbdbdb;
+    cursor: pointer;
+    margin-left: 1vw;
+    font-weight: 100;
+}
+
+.author-link {
+    cursor: pointer;
+}
+
+/* Rating stars */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+.right {
+  text-align: right;
+}
+
+.rating-details:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {
+    width: 60%; height: 18px; background-color: #ff9800;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.bar-4 {
+    width: 30%; height: 18px; background-color: #ff9800;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.bar-3 {
+    width: 10%; height: 18px; background-color: #ff9800;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.bar-2 {
+    width: 4%; height: 18px; background-color: #ff9800;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.bar-1 {
+    width: 15%; height: 18px; background-color: #ff9800;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (max-width: 860px) {
+    .genre-tag-list {
+        float: left;
+    }
+    .book-details-table {
+        margin-top: 10vh;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .book-view-container {
+        display: inline-block;
+    }
+    .book-view-left, .book-view-right {
+        width: 100%;
+    }
+    .genre-tag-list {
+        float: left;
+    }
+    .side, .middle {
+        width: 100%;
+    }
+    .right {
+        display: none;
+    }
+}
+
+.black{
+    color: black;
+}
+       
