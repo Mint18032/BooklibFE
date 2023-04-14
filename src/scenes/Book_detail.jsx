@@ -89,7 +89,7 @@ function BookDetail() {
 
     return () => {
     }
-  }, [])
+  });
   const readBook = async (e) => {
     nav("/reading/" + data.book_id)
   }
@@ -229,6 +229,8 @@ function BookDetail() {
             </div>
           </div>
         </div>
+
+        {/* TODO: fix ratings, commment */}
         {fiveStar.map((four) => (
           <div style={{ marginRight: "100px" }}>
             <section className="">

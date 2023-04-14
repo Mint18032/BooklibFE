@@ -140,7 +140,7 @@ const Sidebar = (props) => {
             />
             <Item
               title="home page"
-              to="/home"
+              to="/"
               icon={<BusinessIcon />}
               selected={selected}
               setSelected={setSelected}

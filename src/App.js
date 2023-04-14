@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Form from "./scenes/form";
@@ -13,18 +12,11 @@ import BookDetail from "./scenes/Book_detail";
 import Register from "./scenes/Register";
 import Login from "./scenes/Login";
 import Reading from "./scenes/Reading";
-import Accounts from "./scenes/Accounts";
+import Accounts from "./scenes/Accounts"; // TODO: fix
 import Author from "./scenes/Author";
 import DeleteBook from "./scenes/deletebook";
 function App() {
   const [theme, colorMode] = useMode();  
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setTimeout(() => {
-      navigate('/home', { replace: true });
-    }, 300);
-  });
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -34,7 +26,7 @@ function App() {
           <main className="content">
             
             <Routes>
-              <Route path="/home" element={<><Header /> <HomePage /> <Footer /> </>}/>
+              <Route path="/" element={<><Header /> <HomePage /> <Footer /> </>}/>
               <Route path="/register" element={<><Header /> <Register /> <Footer /> </>}/>
               <Route path="/search" element={<><Header /> <Search /> <Footer /> </>}/>
               <Route path="/login" element={<><Header /> <Login /> <Footer /> </>}/>

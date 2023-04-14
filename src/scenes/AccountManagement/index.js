@@ -4,13 +4,11 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import "../../index.css"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   ref,
   uploadBytes,
   getDownloadURL,
-  listAll,
-  list,
 } from "firebase/storage";
 import { storage } from "../../firebase";
 import { v4 } from "uuid";

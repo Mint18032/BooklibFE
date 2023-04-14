@@ -10,7 +10,7 @@ import { FacebookIcon, TwitterIcon, TelegramIcon } from "react-share";
 function Footer() {
     return (
         <footer>
-        <div>Tại sao thư viện sách <Link to="/home">Booklib</Link> nên là sự lựa chọn của bạn?</div>
+        <div>Tại sao thư viện sách <Link to="/">Booklib</Link> nên là sự lựa chọn của bạn?</div>
         <ul>
           <li>
             Thư viện cung cấp những tiện ích hoàn toàn miễn phí.

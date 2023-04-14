@@ -35,7 +35,7 @@ function Login() {
             .catch((err) => console.log(err));
         return () => {
         }
-    }, [])
+    });
     const handleToggle = () => {
         if (type === 'password') {
             setIcon(eye);

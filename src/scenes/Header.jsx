@@ -39,10 +39,10 @@ function Header() {
 
   return (
     <header className="header1">
-      <Link to="/home">
+      <Link to="/">
         <div className="sitelogo"  /></Link>
       <nav className="toolBar">
-        <Link className="tabBtn" role="button" to="/home">Trang chủ</Link>
+        <Link className="tabBtn" role="button" to="/">Trang chủ</Link>
         <Link className="tabBtn" role="button" to="/search">
           <div style={{WebkitTransform: 'rotate(-45deg)', MozTransform: 'rotate(-45deg)', OTransform: 'rotate(-45deg)', transform: 'rotate(-45deg)', display: 'inline-block'}}>
             ⚲
