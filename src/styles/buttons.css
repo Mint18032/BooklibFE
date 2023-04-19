@@ -24,7 +24,7 @@ button {
 .redBtn {
     position: relative;
     float: right;
-    background-color: #cf2122;
+    background-color: #c69917;
     text-align: center;
     text-decoration: none;
     padding-top: 2px;
@@ -39,7 +39,7 @@ button {
 }
 
 .redBtn:hover {
-  background-color: #c52020;
+  background-color: #d1ac1c;
   color: white;
 }
 

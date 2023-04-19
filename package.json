@@ -75,5 +75,9 @@
   },
   "devDependencies": {
     "sass": "^1.56.1"
-  }
+  },
+  "description": "Frontend part of a book reading website.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
