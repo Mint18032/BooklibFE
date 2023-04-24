@@ -73,7 +73,7 @@ button {
 }
 
 .readBtn {
-    background-color: #dd003f;
+    background-color: #c69917;
     color: white;
     cursor: pointer;
     height: 2.5em;
@@ -89,7 +89,7 @@ button {
 }
 
 .readBtn:hover {
-    background-color: #f14668;
+    background-color: #d1ac1c;
 }
 
 .share-to-fb {

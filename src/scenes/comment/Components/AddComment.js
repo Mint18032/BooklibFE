@@ -28,7 +28,7 @@ const AddComment = ({ buttonValue, addComments, replyingTo }) => {
       <div className="profile-pic"></div>
       <textarea
         className="comment-input"
-        placeholder="Add a comment"
+        placeholder="Bình luận"
         value={replyingToUser + comment}
         onChange={(e) => {
           setComment(
