@@ -35,7 +35,7 @@ function Header() {
       if(signedin === false)
         signin(!signedin);
     })
-  }, []);
+  }, [signedin]);
 
   return (
     <header className="header1">

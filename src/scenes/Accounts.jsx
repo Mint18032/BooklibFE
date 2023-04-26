@@ -150,7 +150,7 @@ const Account = (props) => {
     fetchUser()
     return () => {
     }
-  });
+  }, []);
 
   if (!user) {
     return <>loading</> //loading
