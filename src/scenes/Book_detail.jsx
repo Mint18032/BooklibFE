@@ -26,6 +26,7 @@ function BookDetail() {
   const [genre, setGenre] = useState([]);
   const [author, setAuthor] = useState([]);
   const [commentData, setcommentData] = useState("");
+  const [ratingData, setRatingData] = useState(0);
   const [ratingStars, updateRatingStar] = useState([[], [], [], [], []]);
   const [starCount, countStar] = useState([]);
   const { register, handleSubmit } = useForm();
@@ -49,7 +50,6 @@ function BookDetail() {
       .then(function (response) {
         console.log(response);
         document.getElementById("closeadd")?.click();
-        //handleClose()
       })
       .catch(function (error) {});
   };
@@ -77,15 +77,17 @@ function BookDetail() {
             res.data.two_star.ratings,
             res.data.one_star.ratings,
           ]);
+          let totalRatings = (ratingStars[0].length + ratingStars[2].length + ratingStars[3].length + ratingStars[4].length + ratingStars[1].length);
+          if (totalRatings === 0) totalRatings = 1;
           countStar([
-            (ratingStars[0].length + ratingStars[2].length + ratingStars[3].length + ratingStars[4].length + ratingStars[1].length) / 5,
-            ratingStars[0].length,
-            ratingStars[1].length,
-            ratingStars[2].length,
-            ratingStars[3].length,
+            (ratingStars[0].length*5 + ratingStars[1].length*4 + ratingStars[2].length*3 + ratingStars[3].length*2 + ratingStars[4].length*1) / totalRatings,
             ratingStars[4].length,
+            ratingStars[3].length,
+            ratingStars[2].length,
+            ratingStars[1].length,
+            ratingStars[0].length,
+            totalRatings,
           ]);
-          console.log(res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -104,6 +106,10 @@ function BookDetail() {
     setcommentData(cmmt);
   };
   const addRatings = async (e) => {
+    if (ratingData === 0) {
+      alert("Vui lòng chọn số sao thích hợp!");
+      return;
+    }
     axios
       .post(
         `http://localhost:5000/my_ratings?state=${localStorage.getItem(
@@ -111,7 +117,7 @@ function BookDetail() {
         )}`,
         {
           book_id: data.book_id,
-          stars: 3,
+          stars: ratingData,
           content: commentData,
         },
         {}
@@ -124,6 +130,8 @@ function BookDetail() {
       .catch(function (error) {
         console.log(error);
       });
+      setcommentData("");
+      setRatingData(0);
   };
   const toAuthor = async (e) => {
     console.log(e.currentTarget.id);
@@ -160,7 +168,7 @@ function BookDetail() {
                 <span className={starCount[0] >= 4 ? "fa fa-star checked-star" : "fa fa-star"} />
                 <span className={starCount[0] === 5 ? "fa fa-star checked-star" : "fa fa-star"} />
                 &nbsp;
-                <div className="average-rating-point">{starCount.average}</div>
+                <div className="average-rating-point">{starCount[0] > 0 ? starCount[0] : "0"}</div>
               </div>
               <br />
               <button className="share-to-fb">
@@ -193,7 +201,7 @@ function BookDetail() {
                     <td>
                       {" "}
                       {genre.map((gen) => (
-                        <a className="genre-tag">{gen}</a>
+                        <span className="genre-tag">{gen}</span>
                       ))}
                     </td>
                   </tr>
@@ -215,7 +223,7 @@ function BookDetail() {
                   </div>
                 </div>
                 <div class="side right">
-                  <div>150</div>
+                  <div>{starCount[5]}</div>
                 </div>
                 <div class="side">
                   <div>4 sao</div>
@@ -226,7 +234,7 @@ function BookDetail() {
                   </div>
                 </div>
                 <div class="side right">
-                  <div>63</div>
+                  <div>{starCount[4]}</div>
                 </div>
                 <div class="side">
                   <div>3 sao</div>
@@ -237,7 +245,7 @@ function BookDetail() {
                   </div>
                 </div>
                 <div class="side right">
-                  <div>15</div>
+                  <div>{starCount[3]}</div>
                 </div>
                 <div class="side">
                   <div>2 sao</div>
@@ -248,18 +256,18 @@ function BookDetail() {
                   </div>
                 </div>
                 <div class="side right">
-                  <div>6</div>
+                  <div>{starCount[2]}</div>
                 </div>
                 <div class="side">
                   <div>1 sao</div>
                 </div>
                 <div class="middle">
                   <div class="bar-container">
-                    <div class="bar-1"></div>
+                    <div class="bar-1" style={{width: starCount[1] / starCount[6] * 100}}></div>
                   </div>
                 </div>
                 <div class="side right">
-                  <div>20</div>
+                  <div>{starCount[1]}</div>
                 </div>
               </div>
             </div>
@@ -337,11 +345,11 @@ function BookDetail() {
                           Bình luận
                         </MDBTypography>
                         <a className="rating-stars" href="#ratingDetails">
-                          <span className="fa fa-star checked-star" />
-                          <span className="fa fa-star checked-star" />
-                          <span className="fa fa-star checked-star" />
-                          <span className="fa fa-star checked-star" />
-                          <span className="fa fa-star" />
+                          <span className="fa fa-star" onClick={() => setRatingData(1)}/>
+                          <span className="fa fa-star" onClick={() => setRatingData(2)} />
+                          <span className="fa fa-star" onClick={() => setRatingData(3)} />
+                          <span className="fa fa-star" onClick={() => setRatingData(4)} />
+                          <span className="fa fa-star" onClick={() => setRatingData(5)} />
                           &nbsp;
                         </a>
 

@@ -195,27 +195,27 @@ a.genre-tag {
 
 /* Individual bars */
 .bar-5 {
-    width: 60%; height: 18px; background-color: #ff9800;
+    height: 18px; background-color: #ff9800;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 .bar-4 {
-    width: 30%; height: 18px; background-color: #ff9800;
+    height: 18px; background-color: #ff9800;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
-.bar-3 {
-    width: 10%; height: 18px; background-color: #ff9800;
+.bar-3 { 
+    height: 18px; background-color: #ff9800;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
-.bar-2 {
-    width: 4%; height: 18px; background-color: #ff9800;
+.bar-2 { 
+    height: 18px; background-color: #ff9800;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 .bar-1 {
-    width: 15%; height: 18px; background-color: #ff9800;
+    height: 18px; background-color: #ff9800;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
