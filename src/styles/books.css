@@ -1,30 +1,55 @@
 div.card-body {
-    background-color: #e6f5ff;
+    background-color: #07234d;
     border-radius: 5px;
     border: none;
 }
 
-textarea.form-control {
-    background-color: #ccebff;
+div.card-body h5 {
+    color: white;
 }
+
+div.card-body p {
+    color: white;
+}
+
+textarea.form-control {
+    background-color: #0d2a56;
+    color: white;
+}
+
+/* textarea.form-control:focus {
+    background-color: #d5e2f5;
+} */
 
 input#coll-name {
     margin-left: 5px;
 }
 
+a.rating-stars span:hover {
+    color: yellow;
+}
+
+a.rating-stars:hover {
+    color: white; 
+}
+
+div.comment-section {
+    background-color: #07234d;
+    padding: 2vw;
+    padding-bottom: 30px;
+}
+
 .bookDetails {
-    position: relative;
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100vh;
     font-family: sans-serif;
 }
 
-.bookDetails h2 {
-    margin-left: 0;
+.comment-section h2 {
+    margin-left: 5px;
+    margin-bottom: 3vh;
     letter-spacing: 2px;
-    font-weight: bolder;
 }
 
 .rating-stars {
@@ -65,7 +90,7 @@ input#coll-name {
     top: -250px;
     width: 100%;
     padding: 0 2rem;
-    height: max-content;
+    margin-bottom: -200px;
     z-index: 10;
 }
 
@@ -166,16 +191,24 @@ a.genre-tag {
   float: left;
   width: 15%;
   margin-top:10px;
+  text-align: right;
+  padding-right: 15px;
 }
 
 .middle {
-  margin-top:10px;
+  margin-top:15px;
   float: left;
   width: 70%;
 }
 
 .right {
-  text-align: right;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.rating-details {
+   width: 70%;
+   margin: auto;
 }
 
 .rating-details:after {
@@ -194,30 +227,9 @@ a.genre-tag {
 }
 
 /* Individual bars */
-.bar-5 {
-    height: 18px; background-color: #ff9800;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.bar-4 {
-    height: 18px; background-color: #ff9800;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.bar-3 { 
-    height: 18px; background-color: #ff9800;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.bar-2 { 
-    height: 18px; background-color: #ff9800;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.bar-1 {
-    height: 18px; background-color: #ff9800;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+.rating-bar {
+    height: 10px; background-color: #c69917;
+    border-radius: 4px;
 }
 
 @media screen and (max-width: 860px) {
@@ -244,6 +256,9 @@ a.genre-tag {
     }
     .right {
         display: none;
+    }
+    .left {
+        padding-right: 0;
     }
 }
 

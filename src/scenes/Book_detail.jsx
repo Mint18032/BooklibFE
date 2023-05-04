@@ -3,7 +3,7 @@ import "../styles/general.css";
 import "../styles/books.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import React from "react";
@@ -19,6 +19,7 @@ import {
   MDBTextArea,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { useCallback } from "react";
 
 function BookDetail() {
   const [data, setData] = useState([]);
@@ -30,6 +31,7 @@ function BookDetail() {
   const [ratingStars, updateRatingStar] = useState([[], [], [], [], []]);
   const [starCount, countStar] = useState([]);
   const { register, handleSubmit } = useForm();
+  let nav = useNavigate();
 
   const updateCollection = async (e) => {
     console.log(e);
@@ -39,11 +41,7 @@ function BookDetail() {
           e.name
         }?state=${localStorage.getItem("state")}`,
         {
-          //  axios.post(`http://localhost:5000/my_account?state=${localSlogtorage.getItem('state')}`, {
-          //"username": user.username,
-
           books: [auth_id],
-          // "books":
         },
         {}
       )
@@ -54,7 +52,7 @@ function BookDetail() {
       .catch(function (error) {});
   };
 
-  function fetchBook() {
+  const fetchBook = useCallback(() => {
     axios
       .get(`http://localhost:5000/books/?book_id=${auth_id}`, {
         headers: {
@@ -77,34 +75,45 @@ function BookDetail() {
             res.data.two_star.ratings,
             res.data.one_star.ratings,
           ]);
-          let totalRatings = (ratingStars[0].length + ratingStars[2].length + ratingStars[3].length + ratingStars[4].length + ratingStars[1].length);
+          let totalRatings =
+            res.data.five_star.ratings.length +
+            res.data.four_star.ratings.length +
+            res.data.three_star.ratings.length +
+            res.data.two_star.ratings.length +
+            res.data.one_star.ratings.length;
           if (totalRatings === 0) totalRatings = 1;
           countStar([
-            (ratingStars[0].length*5 + ratingStars[1].length*4 + ratingStars[2].length*3 + ratingStars[3].length*2 + ratingStars[4].length*1) / totalRatings,
-            ratingStars[4].length,
-            ratingStars[3].length,
-            ratingStars[2].length,
-            ratingStars[1].length,
-            ratingStars[0].length,
+            (res.data.five_star.ratings.length * 5 +
+              res.data.four_star.ratings.length * 4 +
+              res.data.three_star.ratings.length * 3 +
+              res.data.two_star.ratings.length * 2 +
+              res.data.one_star.ratings.length * 1) /
+              totalRatings,
+              res.data.one_star.ratings.length,
+              res.data.two_star.ratings.length,
+              res.data.three_star.ratings.length,
+              res.data.four_star.ratings.length,
+              res.data.five_star.ratings.length,
             totalRatings,
           ]);
         }
       })
       .catch((err) => console.log(err));
-  }
-
-  let nav = useNavigate();
+  }, [auth_id, nav]);
 
   useEffect(() => {
     fetchBook();
-  }, []);
+  }, [fetchBook]);
+
   const readBook = async (e) => {
     nav("/reading/" + data.book_id);
   };
+
   const cmt = async (e) => {
     const cmmt = await e.target.value;
     setcommentData(cmmt);
   };
+
   const addRatings = async (e) => {
     if (ratingData === 0) {
       alert("Vui lòng chọn số sao thích hợp!");
@@ -124,15 +133,15 @@ function BookDetail() {
       )
       .then(function (response) {
         console.log(response.data);
-
         fetchBook();
       })
       .catch(function (error) {
         console.log(error);
       });
-      setcommentData("");
-      setRatingData(0);
+    setcommentData("");
+    setRatingData(0);
   };
+
   const toAuthor = async (e) => {
     console.log(e.currentTarget.id);
     const id = await e.currentTarget.id;
@@ -162,13 +171,37 @@ function BookDetail() {
               <h1 className="book-name">{data.title}</h1>
 
               <div className="rating-stars">
-                <span className={starCount[0] >= 1 ? "fa fa-star checked-star" : "fa fa-star"} />
-                <span className={starCount[0] >= 2 ? "fa fa-star checked-star" : "fa fa-star"} />
-                <span className={starCount[0] >= 3 ? "fa fa-star checked-star" : "fa fa-star"} />
-                <span className={starCount[0] >= 4 ? "fa fa-star checked-star" : "fa fa-star"} />
-                <span className={starCount[0] === 5 ? "fa fa-star checked-star" : "fa fa-star"} />
+                <span
+                  className={
+                    starCount[0] >= 1 ? "fa fa-star checked-star" : "fa fa-star"
+                  }
+                />
+                <span
+                  className={
+                    starCount[0] >= 2 ? "fa fa-star checked-star" : "fa fa-star"
+                  }
+                />
+                <span
+                  className={
+                    starCount[0] >= 3 ? "fa fa-star checked-star" : "fa fa-star"
+                  }
+                />
+                <span
+                  className={
+                    starCount[0] >= 4 ? "fa fa-star checked-star" : "fa fa-star"
+                  }
+                />
+                <span
+                  className={
+                    starCount[0] === 5
+                      ? "fa fa-star checked-star"
+                      : "fa fa-star"
+                  }
+                />
                 &nbsp;
-                <div className="average-rating-point">{starCount[0] > 0 ? starCount[0] : "0"}</div>
+                <div className="average-rating-point">
+                  {starCount[0] > 0 ? starCount[0] : "0"}
+                </div>
               </div>
               <br />
               <button className="share-to-fb">
@@ -212,166 +245,269 @@ function BookDetail() {
                 </tbody>
               </table>
               <div className="book-description">{data.descript}</div>
-              <h2>Đánh giá của người đọc</h2>
-              <div id="ratingDetails" class="rating-details">
-                <div class="side">
-                  <div>5 sao</div>
-                </div>
-                <div class="middle">
-                  <div class="bar-container">
-                    <div class="bar-5"></div>
-                  </div>
-                </div>
-                <div class="side right">
-                  <div>{starCount[5]}</div>
-                </div>
-                <div class="side">
-                  <div>4 sao</div>
-                </div>
-                <div class="middle">
-                  <div class="bar-container">
-                    <div class="bar-4"></div>
-                  </div>
-                </div>
-                <div class="side right">
-                  <div>{starCount[4]}</div>
-                </div>
-                <div class="side">
-                  <div>3 sao</div>
-                </div>
-                <div class="middle">
-                  <div class="bar-container">
-                    <div class="bar-3"></div>
-                  </div>
-                </div>
-                <div class="side right">
-                  <div>{starCount[3]}</div>
-                </div>
-                <div class="side">
-                  <div>2 sao</div>
-                </div>
-                <div class="middle">
-                  <div class="bar-container">
-                    <div class="bar-2"></div>
-                  </div>
-                </div>
-                <div class="side right">
-                  <div>{starCount[2]}</div>
-                </div>
-                <div class="side">
-                  <div>1 sao</div>
-                </div>
-                <div class="middle">
-                  <div class="bar-container">
-                    <div class="bar-1" style={{width: starCount[1] / starCount[6] * 100}}></div>
-                  </div>
-                </div>
-                <div class="side right">
-                  <div>{starCount[1]}</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
 
-        {/* TODO: fix ratings, commment */}
-        {ratingStars.map((startNum, index) => (
-          startNum.map((details) => (
-            <div style={{ marginRight: "100px" }}>
-              <section className="">
-                <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
-                  <MDBRow className="justify-content-center">
-                    <MDBCol>
-                      <div className="d-flex flex-start mb-4">
-                        <img
+        <div className="comment-section">
+          <h2>Đánh giá của người đọc</h2>
+          <div id="ratingDetails" class="rating-details">
+            <div class="side">
+              <div>5 sao</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div
+                  class="rating-bar"
+                  style={{
+                    width: ((starCount[5] / starCount[6]) * 100)
+                      .toString()
+                      .concat("%"),
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div class="side right">
+              <div>{starCount[5]}</div>
+            </div>
+            <div class="side">
+              <div>4 sao</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div
+                  class="rating-bar"
+                  style={{
+                    width: ((starCount[4] / starCount[6]) * 100)
+                      .toString()
+                      .concat("%"),
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div class="side right">
+              <div>{starCount[4]}</div>
+            </div>
+            <div class="side">
+              <div>3 sao</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div
+                  class="rating-bar"
+                  style={{
+                    width: ((starCount[3] / starCount[6]) * 100)
+                      .toString()
+                      .concat("%"),
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div class="side right">
+              <div>{starCount[3]}</div>
+            </div>
+            <div class="side">
+              <div>2 sao</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div
+                  class="rating-bar"
+                  style={{
+                    width: ((starCount[2] / starCount[6]) * 100)
+                      .toString()
+                      .concat("%"),
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div class="side right">
+              <div>{starCount[2]}</div>
+            </div>
+            <div class="side">
+              <div>1 sao</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div
+                  class="rating-bar"
+                  style={{
+                    width: ((starCount[1] / starCount[6]) * 100)
+                      .toString()
+                      .concat("%"),
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div class="side right">
+              <div>{starCount[1]}</div>
+            </div>
+          </div>
+
+          {ratingStars.map((startNum, index) =>
+            startNum.map((details) => (
+              <div style={{ marginRight: "100px" }}>
+                <section className="">
+                  <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
+                    <MDBRow className="justify-content-center">
+                      <MDBCol>
+                        <div className="d-flex flex-start mb-4">
+                          <img
+                            className="rounded-circle shadow-1-strong me-3"
+                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                            alt="avatar"
+                            width="65"
+                            height="65"
+                          />
+
+                          <MDBCard className="w-100">
+                            <MDBCardBody className="p-4">
+                              <div>
+                                <MDBTypography className="black" tag="h5">
+                                  {details.username}
+                                </MDBTypography>
+                                <div>
+                                  <div className="rating-stars">
+                                    <span
+                                      className={
+                                        index + 1 >= 1
+                                          ? "fa fa-star checked-star"
+                                          : "fa fa-star"
+                                      }
+                                    />
+                                    <span
+                                      className={
+                                        index + 1 >= 2
+                                          ? "fa fa-star checked-star"
+                                          : "fa fa-star"
+                                      }
+                                    />
+                                    <span
+                                      className={
+                                        index + 1 >= 3
+                                          ? "fa fa-star checked-star"
+                                          : "fa fa-star"
+                                      }
+                                    />
+                                    <span
+                                      className={
+                                        index + 1 >= 4
+                                          ? "fa fa-star checked-star"
+                                          : "fa fa-star"
+                                      }
+                                    />
+                                    <span
+                                      className={
+                                        index + 1 === 5
+                                          ? "fa fa-star checked-star"
+                                          : "fa fa-star"
+                                      }
+                                    />
+                                    &nbsp;
+                                  </div>
+                                </div>
+                                <p
+                                  className="black"
+                                  style={{ minWidth: "1000px" }}
+                                >
+                                  {details.content}
+                                </p>
+                              </div>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </div>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBContainer>
+                </section>
+              </div>
+            ))
+          )}
+
+          <div style={{ marginLeft: "60px" }}>
+            <section style={{ width: "90%" }}>
+              <MDBRow className="justify-content-center">
+                <MDBCol>
+                  <MDBCard>
+                    <MDBCardBody className="p-4">
+                      <div className="d-flex flex-start w-200">
+                        <MDBCardImage
                           className="rounded-circle shadow-1-strong me-3"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
                           alt="avatar"
                           width="65"
                           height="65"
                         />
 
-                        <MDBCard className="w-100">
-                          <MDBCardBody className="p-4">
-                            <div>
-                              <MDBTypography className="black" tag="h5">
-                                {details.username}
-                              </MDBTypography>
-                              <div>                                  
-                                <div className="rating-stars">
-                                  <span className={index + 1 >= 1 ? "fa fa-star checked-star" : "fa fa-star"} />
-                                  <span className={index + 1 >= 2 ? "fa fa-star checked-star" : "fa fa-star"} />
-                                  <span className={index + 1 >= 3 ? "fa fa-star checked-star" : "fa fa-star"} />
-                                  <span className={index + 1 >= 4 ? "fa fa-star checked-star" : "fa fa-star"} />
-                                  <span className={index + 1 === 5 ? "fa fa-star checked-star" : "fa fa-star"} />
-                                  &nbsp;
-                                </div>
-                              </div>
-                              <p
-                                className="black"
-                                style={{ minWidth: "1000px" }}
-                              >
-                                {details.content}
-                              </p>
-                            </div>
-                          </MDBCardBody>
-                        </MDBCard>
-                      </div>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBContainer>
-              </section>
-            </div>
-          ))
-        ))}
+                        <div className="w-100">
+                          <MDBTypography className="black" tag="h5">
+                            Bình luận
+                          </MDBTypography>
+                          <a className="rating-stars" href="#ratingDetails">
+                            <span
+                              className={
+                                ratingData >= 1
+                                  ? "fa fa-star checked-star"
+                                  : "fa fa-star"
+                              }
+                              onClick={() => setRatingData(1)}
+                            />
+                            <span
+                              className={
+                                ratingData >= 2
+                                  ? "fa fa-star checked-star"
+                                  : "fa fa-star"
+                              }
+                              onClick={() => setRatingData(2)}
+                            />
+                            <span
+                              className={
+                                ratingData >= 3
+                                  ? "fa fa-star checked-star"
+                                  : "fa fa-star"
+                              }
+                              onClick={() => setRatingData(3)}
+                            />
+                            <span
+                              className={
+                                ratingData >= 4
+                                  ? "fa fa-star checked-star"
+                                  : "fa fa-star"
+                              }
+                              onClick={() => setRatingData(4)}
+                            />
+                            <span
+                              className={
+                                ratingData === 5
+                                  ? "fa fa-star checked-star"
+                                  : "fa fa-star"
+                              }
+                              onClick={() => setRatingData(5)}
+                            />
+                            &nbsp;
+                          </a>
 
-        <div style={{ marginLeft: "60px" }}>
-          <section style={{ width: "90%" }}>
-            <MDBRow className="justify-content-center">
-              <MDBCol>
-                <MDBCard>
-                  <MDBCardBody className="p-4">
-                    <div className="d-flex flex-start w-200">
-                      <MDBCardImage
-                        className="rounded-circle shadow-1-strong me-3"
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
-                        alt="avatar"
-                        width="65"
-                        height="65"
-                      />
+                          <MDBTextArea
+                            onChange={cmt}
+                            className="text-black"
+                            label="Thêm nhận xét của bạn"
+                            rows={4}
+                          />
 
-                      <div className="w-100">
-                        <MDBTypography className="black" tag="h5">
-                          Bình luận
-                        </MDBTypography>
-                        <a className="rating-stars" href="#ratingDetails">
-                          <span className="fa fa-star" onClick={() => setRatingData(1)}/>
-                          <span className="fa fa-star" onClick={() => setRatingData(2)} />
-                          <span className="fa fa-star" onClick={() => setRatingData(3)} />
-                          <span className="fa fa-star" onClick={() => setRatingData(4)} />
-                          <span className="fa fa-star" onClick={() => setRatingData(5)} />
-                          &nbsp;
-                        </a>
-
-                        <MDBTextArea
-                          onChange={cmt}
-                          label="Thêm nhận xét của bạn"
-                          rows={4}
-                        />
-
-                        <div className="d-flex justify-content-between mt-3">
-                          <MDBBtn onClick={addRatings} color="danger">
-                            Đăng{" "}
-                            <MDBIcon fas icon="long-arrow-alt-right ms-1" />
-                          </MDBBtn>
+                          <div className="d-flex justify-content-between mt-3">
+                            <MDBBtn onClick={addRatings} color="danger">
+                              Đăng{" "}
+                              <MDBIcon fas icon="long-arrow-alt-right ms-1" />
+                            </MDBBtn>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </section>
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+            </section>
+          </div>
         </div>
       </div>
       <div
