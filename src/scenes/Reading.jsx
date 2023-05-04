@@ -8,6 +8,7 @@ import "./Components/css/App.css";
 import Notes from "./Components/NoteComponents/Notes";
 import React from "react";
 import { ScrollTo } from "react-scroll-to";
+import { Helmet } from 'react-helmet';
 
 function Reading() {
   const nav = useNavigate( )
@@ -99,7 +100,11 @@ function Reading() {
    
 
   return (
-    
+    <>
+    <Helmet>
+      <title>{data.title}</title>
+    </Helmet>
+
     <div className='reading-view'>
       <ScrollTo>
         {({ scroll }) => (
@@ -115,6 +120,7 @@ function Reading() {
         <p style={{whiteSpace: "pre-wrap"}}>{ data.content}</p>
       </div>
     </div>
+    </>
   );
 }
 export default Reading

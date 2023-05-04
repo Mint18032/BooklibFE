@@ -14,12 +14,12 @@ div.card-body p {
 
 textarea.form-control {
     background-color: #0d2a56;
-    color: white;
+    color: white !important;
 }
 
-/* textarea.form-control:focus {
-    background-color: #d5e2f5;
-} */
+textarea.form-control:focus {
+    background-color: #0a2042;
+}
 
 input#coll-name {
     margin-left: 5px;
@@ -190,7 +190,7 @@ a.genre-tag {
 .side {
   float: left;
   width: 15%;
-  margin-top:10px;
+  margin-top: 8px;
   text-align: right;
   padding-right: 15px;
 }
@@ -257,7 +257,7 @@ a.genre-tag {
     .right {
         display: none;
     }
-    .left {
+    .side {
         padding-right: 0;
     }
 }

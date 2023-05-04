@@ -5,8 +5,7 @@ import Rating from '@mui/material/Rating';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useRef} from 'react';
-
-
+import { Helmet } from 'react-helmet';
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -57,8 +56,10 @@ function Search() {
   }
 
   return (
-    <div>
+    <>
+    <Helmet>
       <title>Tìm kiếm sách</title>
+    </Helmet>
 
       <div id="wrapper">
         <div className="search-field">
@@ -93,7 +94,7 @@ function Search() {
           })}
         </ul>
       </div>
-    </div>
+    </>
   );
 }
 export default Search

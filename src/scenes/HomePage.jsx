@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router-dom';
 import {useRef} from 'react';
+import { Helmet } from 'react-helmet';
 
 const HomePage = (props) => {
   const ref = useRef(null);
@@ -195,8 +196,11 @@ const HomePage = (props) => {
   
 
   return (
-    <div>
-      <title>GeekyGenie</title>
+    <>
+    <Helmet>
+      <title>Booklib</title> 
+    </Helmet>
+         
       <div id="wrapper">
         <div className="search-field">
           <div className="field">
@@ -315,7 +319,7 @@ const HomePage = (props) => {
         </ul>
 
       </div>
-    </div>
+    </>
   );
 }
 

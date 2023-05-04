@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import React from "react";
+import { Helmet } from 'react-helmet';
 import {
   MDBBtn,
   MDBCard,
@@ -69,11 +70,11 @@ function BookDetail() {
           setGenre(res.data.genre);
           setAuthor(res.data.authors[0]);
           updateRatingStar([
-            res.data.five_star.ratings,
-            res.data.four_star.ratings,
-            res.data.three_star.ratings,
-            res.data.two_star.ratings,
             res.data.one_star.ratings,
+            res.data.two_star.ratings,
+            res.data.three_star.ratings,
+            res.data.four_star.ratings,
+            res.data.five_star.ratings,
           ]);
           let totalRatings =
             res.data.five_star.ratings.length +
@@ -134,12 +135,13 @@ function BookDetail() {
       .then(function (response) {
         console.log(response.data);
         fetchBook();
+        setcommentData("");
+        setRatingData(0);
       })
       .catch(function (error) {
         console.log(error);
+        alert("Không thể nhận xét!");
       });
-    setcommentData("");
-    setRatingData(0);
   };
 
   const toAuthor = async (e) => {
@@ -150,6 +152,10 @@ function BookDetail() {
 
   return (
     <>
+      <Helmet>
+        <title>{data.title}</title>
+      </Helmet>
+
       <div>
         <div className="bookDetails">
           <div className="large-cover" />

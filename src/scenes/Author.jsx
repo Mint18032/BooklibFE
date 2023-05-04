@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router-dom';
 import {useRef} from 'react';
+import { Helmet } from 'react-helmet';
 
 const Author = (props) => {
   const [user, setUser] = useState(null)
@@ -33,6 +34,11 @@ const Author = (props) => {
   }
 
   return (
+    <>
+    <Helmet>
+      <title>Tác giả: {user.author_name}</title>
+    </Helmet>
+
     <div class="body mt-5">
       <div class="container-lg">
         <div class="row">
@@ -46,7 +52,7 @@ const Author = (props) => {
             <div class="p-3">
               <div class="fw-bold text-center fs-3">Thông tin cá nhân</div>
               <div class="px-1 mt-3">
-                <div class="fs-6 fw-bold">Follower</div>
+                <div class="fs-6 fw-bold">Followers</div>
                 <div style={{ color: "#999" }}>{user.follower ?? "Không có thông tin"}</div>
               </div>
               <div class="fs-6 px-1 mt-3">
@@ -96,6 +102,7 @@ const Author = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

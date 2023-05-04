@@ -17,6 +17,7 @@ import { v4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import Rating from '@mui/material/Rating';
 import { useForm } from "react-hook-form";
+import { Helmet } from 'react-helmet';
 
 const Account = (props) => {
   let nav = useNavigate()
@@ -82,6 +83,7 @@ const Account = (props) => {
         console.log(response.data);
         document.getElementById('form1-close')?.click()
         fetchUser()
+        alert("Chỉnh sửa thành công!");
       })
       .catch(function (error) {
         console.log(error);
@@ -157,6 +159,13 @@ const Account = (props) => {
   }
 
   return (
+    <>
+    <Helmet>
+      <title>
+        Trang cá nhân
+      </title>
+    </Helmet>
+
     <div className="body mt-5">
       <div className="container-lg">
         <div className="row">
@@ -438,6 +447,7 @@ const Account = (props) => {
         </form>
       </div>
     </div>
+    </>
   );
 }
 export default Account;
