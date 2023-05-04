@@ -104,7 +104,7 @@ form {
 
 .container a {
     text-decoration: none;
-    color: #428BCA;
+    color: #aaad12;
 }
 
 .container a:hover {
@@ -142,7 +142,7 @@ form {
     content: "";
     width: 100%;
     height: 1px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     position: absolute;
     top: 50%;
     left: 0;

@@ -98,8 +98,8 @@ ul.products li img{
 
 .field {
     flex-basis: 25%;
-    padding-left: 10px;
-    padding-right: 10px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
 }
 
 select {
