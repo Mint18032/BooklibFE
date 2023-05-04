@@ -15,27 +15,27 @@ function Login() {
     const [icon, setIcon] = useState(eyeOff);
     const cookies = new Cookies();
 
-    useEffect(() => {
-        axios.get(`http://localhost:5000/login`, {
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-            },
-        })
-            .then((res) => {
-                console.log(res)
-                // setCookie('state', res.data.state, { path: '/' })
+    // useEffect(() => {
+    //     axios.get(`http://localhost:5000/login`, {
+    //         headers: {
+    //             "Access-Control-Allow-Headers": "Content-Type",
+    //         },
+    //     })
+    //         .then((res) => {
+    //             consoyle.log(res)
+    //             // setCookie('state', res.data.state, { path: '/' })
 
-                cookies.set('state', res.data.state, { path: '/' });
-                // cookies.get('myCat')
+    //             cookies.set('state', res.data.state, { path: '/' });
+    //             // cookies.get('myCat')
 
-                localStorage.setItem('state', (res.data.state));
-                window.location.assign(res.data.auth_url)
-                window.dispatchEvent(new Event("loggedin"));
-            })
-            .catch((err) => console.log(err));
-        return () => {
-        }
-    }, []);
+    //             localStorage.setItem('state', (res.data.state));
+    //             window.location.assign(res.data.auth_url)
+    //             window.dispatchEvent(new Event("loggedin"));
+    //         })
+    //         .catch((err) => console.log(err));
+    //     return () => {
+    //     }
+    // }, []);
     const handleToggle = () => {
         if (type === 'password') {
             setIcon(eye);
@@ -76,12 +76,10 @@ function Login() {
                     <button type="submit" className="item button is-signin">
                     Đăng nhập
                     </button>
-                    <div className="is-divider">
-                    <span>HOẶC</span>
-                    </div>
+                    <div className="is-divider"></div>
                     <button className="item button is-signupGG">
                     <i className="fa-brands fa-google" />
-                    Đăng nhập với Google
+                    Đăng nhập Google
                     </button>
                 </div>
                 <p className="has-text-grey has-text-right">
