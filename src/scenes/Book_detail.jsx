@@ -24,6 +24,7 @@ import { useCallback } from "react";
 
 function BookDetail() {
   const [data, setData] = useState([]);
+  const [avt, setAvt] = useState();
   const { auth_id } = useParams();
   const [genre, setGenre] = useState([]);
   const [author, setAuthor] = useState([]);
@@ -102,8 +103,29 @@ function BookDetail() {
       .catch((err) => console.log(err));
   }, [auth_id, nav]);
 
+  function fetchUser() {
+    axios.get("http://localhost:5000/my_account", {
+      params: { 'state': localStorage.getItem('state') },
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((res) => {
+        if (res.status === 203) {
+          nav("/login");
+        }
+        else {
+          setAvt(res.data.profile_pic !== null ? res.data.profile_pic : "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg");
+          console.log(avt);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
     fetchBook();
+    fetchUser();
   }, [fetchBook]);
 
   const readBook = async (e) => {
@@ -353,11 +375,11 @@ function BookDetail() {
           {ratingStars.map((startNum, index) =>
             startNum.map((details) => (
               <div style={{ marginRight: "100px" }}>
-                <section className="">
-                  <MDBContainer className="py-5" style={{ maxWidth: "1000px" }}>
+                <section>
+                  <MDBContainer style={{ maxWidth: "1000px" }}>
                     <MDBRow className="justify-content-center">
                       <MDBCol>
-                        <div className="d-flex flex-start mb-4">
+                        <div className="d-flex flex-start">
                           <img
                             className="rounded-circle shadow-1-strong me-3"
                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
@@ -432,14 +454,14 @@ function BookDetail() {
 
           <div style={{ marginLeft: "60px" }}>
             <section style={{ width: "90%" }}>
-              <MDBRow className="justify-content-center">
+              <MDBRow className="justify-content-center mt-5">
                 <MDBCol>
                   <MDBCard>
                     <MDBCardBody className="p-4">
                       <div className="d-flex flex-start w-200">
                         <MDBCardImage
                           className="rounded-circle shadow-1-strong me-3"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                          src={avt}
                           alt="avatar"
                           width="65"
                           height="65"

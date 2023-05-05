@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Icon } from 'react-icons-kit';
 import {eyeOff} from 'react-icons-kit/feather/eyeOff'
 import {eye} from 'react-icons-kit/feather/eye'
+import { Helmet } from 'react-helmet';
 
 
 function Register() {
@@ -23,7 +24,10 @@ function Register() {
     }
 
     return (
-        <div>
+        <>
+        <Helmet>
+            <title>Đăng ký</title>
+        </Helmet>
         
         <div className="container">
             <form action="" method="POST" autoComplete="on">
@@ -79,7 +83,7 @@ function Register() {
                 </div>
             </form>
         </div>
-        </div>     
+        </>     
  );
 }
 export default Register
