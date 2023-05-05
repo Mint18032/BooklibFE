@@ -16,10 +16,12 @@ const HomePage = (props) => {
 
   const [newBooks, setNewBooks] = useState(null)
   const [personalBooks, setPersonalBooks] = useState([])
-  const [genres, setgenres] = useState(null)
-  const [sort_by_year, setsort_by_year] = useState(null)
-  const [min_rating, setmin_rating] = useState(null)
-  const [min_pages, setmin_pages] = useState(10)
+  const [genres, setgenres] = useState(" ")
+  const [min_year, setmin_year] = useState(-3000)
+  const [max_year, setmax_year] = useState(3000)
+  const [min_rating, setmin_rating] = useState(0)
+  const [max_rating, setmax_rating] = useState(5)
+  const [min_pages, setmin_pages] = useState(0)
   const [max_pages, setmax_pages] = useState(10000)
 
   
@@ -65,7 +67,7 @@ const HomePage = (props) => {
 
   const filterItem = async (e) => {
     
-  const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&sort_by_year=${sort_by_year}&min_rating=${min_rating}&min_pages=${min_pages}&max_pages=${max_pages}`, {
+  const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
     
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -81,12 +83,9 @@ const HomePage = (props) => {
   };
 
   const filterItem0 = async (e) => {
-    const dat = e.target.value
-    
-    if (dat === "sachle") {
-      setmin_pages(0)
-      setmax_pages(100)
-      const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&&sort_by_year=${sort_by_year}&min_rating=${min_rating}&min_pages=0&max_pages=100`, {
+    const _genre = e.target.value
+    setgenres(_genre)
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${_genre}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
     
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -100,98 +99,136 @@ const HomePage = (props) => {
         else {
           setPopularBooks(res.data)
         }
+  }
+  
+  const filterItem1 = async (e) => {
+    const data = e.target.value
+    let _minYear = -3000
+    let _maxYear = 3000
+    
+    if (data === "1") {
+      setmin_year(-3000)
+      setmax_year(0)
+      _minYear = -3000
+      _maxYear = 0
+    } 
+    else if (data === "2") {
+      setmin_year(0)
+      setmax_year(1900)
+      _minYear = 0
+      _maxYear = 1900
+    } 
+    else if (data === "3") {
+      setmin_year(1900)
+      setmax_year(3000)
+      _minYear = 1900
+      _maxYear = 3000
+    } 
+    else {
+      setmin_year(-3000)
+      setmax_year(3000)
+      _minYear = -3000
+      _maxYear = 3000
     }
-    else if (dat === "sachbo") {
-      setmin_pages(300)
-      setmax_pages(500)
-      const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&sort_by_year=${sort_by_year}&min_rating=${min_rating}&min_pages=300&max_pages=500`, {
     
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${_minYear}&max_year=${_maxYear}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
       },
-    })
-     
-        if (res.status === 203) {
-          nav("/login")
-        }
-        else {
-          setPopularBooks(res.data)
-         }
+      })
+      if (res.status === 203) {
+        nav("/login")
+      } else {
+        setPopularBooks(res.data)
     }
   }
-
-   const filterItem1 = async (e) => {
-     const dat = e.target.value
-     setgenres(dat)
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${dat}&sort_by_year=${sort_by_year}&min_rating=${min_rating}&min_pages=${min_pages}&max_pages=${max_pages}`, {
-    
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        'Content-Type': 'application/json'
-      },
-    })
-     
-        if (res.status === 203) {
-          nav("/login")
-        }
-        else {
-          setPopularBooks(res.data)
-        }
-      }
-      
-  const filterItem2 = async (e) => {
-    var dat = e.target.value
-    let  true_dat = 1
-    if (dat === "cao") {
-      true_dat = 3
-    }
-    else {
-       true_dat = 1
-    }
-    setmin_rating(true_dat)
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&sort_by_year=${sort_by_year}&min_rating=${true_dat}&min_pages=${min_pages}&max_pages=${max_pages}`, {
-    
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        'Content-Type': 'application/json'
-      },
-    })
-     
-        if (res.status === 203) {
-          nav("/login")
-        }
-        else {
-          setPopularBooks(res.data)
-        }
-      }
   
-  const filterItem3 = async (e) => {
-    const dat = e.target.value
-    let data = "asceding"
-    if (dat === "tang") {
-      data = "asceding"
-    }
-    else {
-      data = "descending"
-
-    }
-    setsort_by_year(data)
-   const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&sort_by_year=${data}&min_rating=${min_rating}&min_pages=${min_pages}&max_pages=${max_pages}`, {
-   
-     headers: {
-       "Access-Control-Allow-Headers": "Content-Type",
-       'Content-Type': 'application/json'
-     },
-   })
+  const filterItem2 = async (e) => {
+    const data = e.target.value
+    let _minPage = 0
+    let _maxPage = 10000
     
-       if (res.status === 203) {
-         nav("/login")
-       }
-       else {
-         setPopularBooks(res.data)
-        }
-      }
+    if (data === "1") {
+      setmin_pages(0)
+      setmax_pages(200)
+      _minPage = 0
+      _maxPage = 200
+    } 
+    else if (data === "2") {
+      setmin_pages(200)
+      setmax_pages(800)
+      _minPage = 200
+      _maxPage = 800
+    } 
+    else if (data === "3") {
+        setmin_pages(800)
+        setmax_pages(10000)
+        _minPage = 800
+        _maxPage = 10000
+    } 
+    else {
+      setmin_pages(0)
+      setmax_pages(10000)
+      _minPage = 0
+      _maxPage = 10000
+    }
+
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${_minPage}&max_pages=${_maxPage}&min_rating=${min_rating}&max_rating=${max_rating}`, {
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        'Content-Type': 'application/json'
+      },
+      })
+      if (res.status === 203) {
+        nav("/login")
+      } else {
+        setPopularBooks(res.data)
+    }
+  }
+      
+  const filterItem3 = async (e) => {
+    const data = e.target.value
+    let _minRating = 0
+    let _maxRating = 5
+    
+    if (data === "1") {
+      setmin_rating(0)
+      setmax_rating(3)
+      _minRating = 0
+      _maxRating = 3
+    } 
+    else if (data === "2") {
+      setmin_rating(3)
+      setmax_rating(4)
+      _minRating = 3
+      _maxRating = 4
+    } 
+    else if (data === "3") {
+      setmin_rating(4)
+      setmax_rating(5)
+      _minRating = 4
+      _maxRating = 5
+    } 
+    else {
+      setmin_rating(0)
+      setmax_rating(5)
+      _minRating = 0
+      _maxRating = 5
+    }
+
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${_minRating}&max_rating=${_maxRating}`, {
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        'Content-Type': 'application/json'
+      },
+      })
+      if (res.status === 203) {
+        nav("/login")
+      } else {
+        setPopularBooks(res.data)
+    }
+  }
 
   
 
@@ -204,52 +241,52 @@ const HomePage = (props) => {
       <div id="wrapper">
         <div className="search-field">
           <div className="fieldd">
-            <label className="label">Thể loại:</label>
+            <label className="label">Thể loại</label>
             <select onChange={(e) => {
                                 filterItem0(e);
                             }}>
-              <option value="0">- Tất cả -</option>
-              <option value="1">Phiêu lưu</option>
-              <option value="2">Cổ điển</option>
-              <option value="3">Tội phạm - Trinh thám</option>
-              <option value="4">Viễn tưởng</option>
-              <option value="5">Cổ tích - Truyền thuyết</option>
-              <option value="6">Lịch sử</option>
-              <option value="7">Kinh dị</option>
-              <option value="8">Hài hước</option>
+              <option value=" ">- Tất cả -</option>
+              <option value="Phiêu lưu">Phiêu lưu</option>
+              <option value="Cổ điển">Cổ điển</option>
+              <option value="Tội phạm">Tội phạm - Trinh thám</option>
+              <option value="Viễn tưởng">Viễn tưởng</option>
+              <option value="Cổ tích">Cổ tích - Truyền thuyết</option>
+              <option value="Lịch sử">Lịch sử</option>
+              <option value="Kinh dị">Kinh dị</option>
+              <option value="Hài hước">Hài hước</option>
             </select>
           </div>
           <div className="fieldd">
-            <label className="label">Năm:</label>
+            <label className="label">Năm</label>
             <select onChange={(e) => {
                                 filterItem1(e);
                             }}>
               <option value="0">- Tất cả -</option>
-              <option value={"1"}>Trước công nguyên</option>
-              <option value={"2"}>Từ năm 0 - năm 1900</option>
-              <option value={"3"}>Từ năm 1900 trở đi</option>
+              <option value="1">Trước công nguyên</option>
+              <option value="2">Từ năm 0 - 1900</option>
+              <option value="3">Sau năm 1900</option>
             </select>
           </div>
           <div className="fieldd">
-            <label className="label">Số trang:</label>
+            <label className="label">Số trang</label>
             <select onChange={(e) => {
                                 filterItem2(e);
                             }}>
               <option value="0">- Tất cả -</option>
               <option value="1">0 - 200 trang</option>
               <option value="2">200 - 800 trang</option>
-              <option value={"3"}>hơn 800 trang</option>
+              <option value="3">Hơn 800 trang</option>
             </select>
           </div>
           <div className="fieldd">
-            <label className="label">Rating:</label>
+            <label className="label">Rating</label>
             <select onChange={(e) => {
-                                filterItem2(e);
+                                filterItem3(e);
                             }}>
              <option value="0">- Tất cả -</option>
              <option value="1">Thấp</option>
              <option value="2">Trung bình</option>
-             <option value={"3"}>Cao</option>
+             <option value="3">Cao</option>
             </select>
           </div>
         </div>
