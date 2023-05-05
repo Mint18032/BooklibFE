@@ -96,6 +96,12 @@ ul.products li img{
     background-color: rgba(14,39,64,.45);
 }
 
+.fieldd {
+    flex-basis: 25%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .field {
     flex-basis: 25%;
     /* padding-left: 10px;
