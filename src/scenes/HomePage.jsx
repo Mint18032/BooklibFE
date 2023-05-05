@@ -203,51 +203,53 @@ const HomePage = (props) => {
          
       <div id="wrapper">
         <div className="search-field">
-          <div className="field">
-            <label className="label">Loại sách:</label>
+          <div className="fieldd">
+            <label className="label">Thể loại:</label>
             <select onChange={(e) => {
                                 filterItem0(e);
                             }}>
-              <option>- Tất cả -</option>
-              <option value="sachle">Sách lẻ</option>
-              <option value="sachbo">Sách bộ</option>
+              <option value="0">- Tất cả -</option>
+              <option value="1">Phiêu lưu</option>
+              <option value="2">Cổ điển</option>
+              <option value="3">Tội phạm - Trinh thám</option>
+              <option value="4">Viễn tưởng</option>
+              <option value="5">Cổ tích - Truyền thuyết</option>
+              <option value="6">Lịch sử</option>
+              <option value="7">Kinh dị</option>
+              <option value="8">Hài hước</option>
             </select>
           </div>
-          <div className="field">
-            <label className="label">Thể loại:</label>
+          <div className="fieldd">
+            <label className="label">Năm:</label>
             <select onChange={(e) => {
                                 filterItem1(e);
                             }}>
-              <option value="">- Tất cả -</option>
-              <option value="Phiêu lưu">Phiêu lưu</option>
-              <option value="Cổ điển">Cổ điển</option>
-              <option value="Tội phạm Trinh thám">Tội phạm - Trinh thám</option>
-              <option value="Viễn tưởng">Viễn tưởng</option>
-              <option value="Cổ tích - Truyền thuyết">Cổ tích - Truyền thuyết</option>
-              <option value="Lịch sử">Lịch sử</option>
-              <option value="Kinh dị">Kinh dị</option>
-              <option value="Hài hước">Hài hước</option>
+              <option value="0">- Tất cả -</option>
+              <option value={"1"}>Trước công nguyên</option>
+              <option value={"2"}>Từ năm 0 - năm 1900</option>
+              <option value={"3"}>Từ năm 1900 trở đi</option>
             </select>
           </div>
-          <div className="field">
-            <label className="label">Ratings:</label>
+          <div className="fieldd">
+            <label className="label">Số trang:</label>
             <select onChange={(e) => {
                                 filterItem2(e);
                             }}>
-              <option>- Tất cả -</option>
-              <option value="cao">Cao</option>
-              <option value="thap">Thấp</option>
-              
+              <option value="0">- Tất cả -</option>
+              <option value="1">0 - 200 trang</option>
+              <option value="2">200 - 800 trang</option>
+              <option value={"3"}>hơn 800 trang</option>
             </select>
           </div>
-          <div className="field">
-            <label className="label">Năm:</label>
+          <div className="fieldd">
+            <label className="label">Rating:</label>
             <select onChange={(e) => {
                                 filterItem2(e);
                             }}>
-             
-              <option value={"tang"}>Từ 2000</option>
-              <option value={"giam"}>Trước 2000</option>
+             <option value="0">- Tất cả -</option>
+             <option value="1">Thấp</option>
+             <option value="2">Trung bình</option>
+             <option value={"3"}>Cao</option>
             </select>
           </div>
         </div>
