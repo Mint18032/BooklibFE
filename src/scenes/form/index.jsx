@@ -85,10 +85,10 @@ const ITEM_PADDING_TOP = 8;
       "content": e.content,
       "descript": e.descript,
       "translator": e.translator,
-      "cover": imageUrls,
+      "cover": null,
       "republish_count": null,
       "genres": [
-          "ggenre1",
+          "genre1",
           "genre2"
       ],
       "authors": [

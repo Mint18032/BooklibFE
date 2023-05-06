@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Rating from '@mui/material/Rating';
 import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet';
+import { Cookies } from 'react-cookie';
 
 const Account = (props) => {
   let nav = useNavigate()
@@ -37,13 +38,14 @@ const Account = (props) => {
 
   const handleClose1 = () => setShow1(false);
   const handleShow1 = () => setShow1(true);
+  const cookies = new Cookies();
   const items = {
-    'state': (localStorage.getItem('state'))
+    'state': (cookies.get('state'))
   };
   const updateCollectionName = async (e) => {
     console.log(e.name);
     console.log(RenameCollection.collName)
-    axios.patch(`http://localhost:5000/my_collections/${RenameCollection.collName}?state=${localStorage.getItem('state')}&new_name=${e.name}`, {
+    axios.patch(`http://localhost:5000/my_collections/${RenameCollection.collName}?state=${cookies.get('state')}&new_name=${e.name}`, {
 
       //  axios.post(`http://localhost:5000/my_account?state=${localSlogtorage.getItem('state')}`, 
       // params: { 'new_coll_name': e.name },
@@ -68,7 +70,7 @@ const Account = (props) => {
   const updateAccount = async (e) => {
     console.log(e);
     e.profile_pic = await uploadFile()
-    axios.post(`http://localhost:5000/my_account?state=${localStorage.getItem('state')}`, {
+    axios.post(`http://localhost:5000/my_account?state=${cookies.get('state')}`, {
       "username": user.username,
       "name": e.name,
       "phone": e.phone,
@@ -92,8 +94,8 @@ const Account = (props) => {
   function deleteCollection(bookId, coolName) {
     console.log(coolName);
     console.log(bookId);
-    //axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}?state=${localStorage.getItem('state')}`)
-    axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}&state=${localStorage.getItem('state')}`,{
+    //axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}?state=${cookies.get('state')}`)
+    axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}&state=${cookies.get('state')}`,{
       
     })
 
@@ -109,8 +111,8 @@ const Account = (props) => {
   }
   function deleteColBook(coolName) {
     console.log(coolName);
-    //axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}?state=${localStorage.getItem('state')}`)
-    axios.delete(`http://localhost:5000/my_collections/${coolName}?state=${localStorage.getItem('state')}`,{
+    //axios.put(`http://localhost:5000/my_collections/${coolName}?book_id=${bookId}?state=${cookies.get('state')}`)
+    axios.delete(`http://localhost:5000/my_collections/${coolName}?state=${cookies.get('state')}`,{
       
     })
 
@@ -128,7 +130,7 @@ const Account = (props) => {
 
   function fetchUser() {
     axios.get("http://localhost:5000/my_account", {
-      params: { 'state': localStorage.getItem('state') },
+      params: { 'state': cookies.get('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'

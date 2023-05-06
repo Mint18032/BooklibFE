@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {useRef} from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Cookies from "universal-cookie";
 
 
 function DeleteBook() {
@@ -13,7 +14,7 @@ function DeleteBook() {
   const [books, setBooks] = useState([])
   const ref = useRef(null);
   const nav = useNavigate()
-
+  const cookies = new Cookies();
 
   useEffect(() => {
     if (searchValue === '') {
@@ -47,7 +48,7 @@ function DeleteBook() {
     }
     const DeleteBook = async(e) => {
         const id = await e.currentTarget.id
-        axios.delete(`http://localhost:5000/books?state=${localStorage.getItem('state')}&book_id=${id}`, {   
+        axios.delete(`http://localhost:5000/books?state=${cookies.get('state')}&book_id=${id}`, {   
             headers: {
                 "Access-Control-Allow-Origin": "*",
             

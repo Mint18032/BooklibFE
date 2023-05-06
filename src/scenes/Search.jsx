@@ -33,14 +33,14 @@ function Search() {
 
   const readpopularBooks = async (e) => {
     console.log(e.currentTarget.id);
-   const id = e.currentTarget.id
-    console.log(ref.current.id);
+    const id = await e.currentTarget.id;
+    // console.log(ref.current.id);
     nav("/book/"+id) 
   }
 
   const toAuthor = async (e) => {
     console.log(e.currentTarget.id);
-   const id = await e.currentTarget.id
+    const id = await e.currentTarget.id;
     
     nav("/author/"+id) 
   }

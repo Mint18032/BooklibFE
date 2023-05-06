@@ -10,12 +10,14 @@ import "../../index.css";
 import Sidebar from "../../scenes/global/Sidebar";
 import SearchIcon from "@mui/icons-material/Search";
 import Alert from '@mui/material/Alert';
+import Cookies from "universal-cookie";
+
 const Team = (props) => {
   const [success, setSucess] = useState(false);
   const [data, setData] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [books, setBooks] = useState([]);
-  
+  const cookies = new Cookies();
 
   const [id, setId] = useState(-1);
   
@@ -56,7 +58,7 @@ const Team = (props) => {
   ];
   function fetchUser() {
     axios.get("http://localhost:5000/my_account", {
-      params: { 'state': localStorage.getItem('state') },
+      params: { 'state': cookies.get('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -76,7 +78,7 @@ const Team = (props) => {
   const Ban10 = (e) => {
     console.log(user)
     console.log(data[selectionModel.newSelectionModel]['username'])
-    axios.post(`http://localhost:5000/ban_user?state=${localStorage.getItem('state')}`, {
+    axios.post(`http://localhost:5000/ban_user?state=${cookies.get('state')}`, {
       "username": data[selectionModel.newSelectionModel]['username'],
       "restrict_due": date10 + " 22:27:5"
   }, {
@@ -103,7 +105,7 @@ const Team = (props) => {
   const Ban100 = (e) => {
     console.log(user)
     console.log(data[selectionModel.newSelectionModel]['username'])
-    axios.post(`http://localhost:5000/ban_user?state=${localStorage.getItem('state')}`, {
+    axios.post(`http://localhost:5000/ban_user?state=${cookies.get('state')}`, {
       "username": data[selectionModel.newSelectionModel]['username'],
       "restrict_due": date100 + " 22:27:5"
   }, {
@@ -128,7 +130,7 @@ const Team = (props) => {
 
   function fetchBook() {
     axios.get("http://localhost:5000/user_list", {
-      params: { 'state': localStorage.getItem('state') },
+      params: { 'state': cookies.get('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -141,7 +143,7 @@ const Team = (props) => {
         else {
           
           const getData = res.data;
-          
+          console.log(res.data)
           setData(getData)
           console.log(getData)
           setUser(getData.username)

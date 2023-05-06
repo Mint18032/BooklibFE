@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/general.css';
+import Cookies from "universal-cookie";
 
 /**
  * Header for user's pages.
  */
 function Header() {
+  const cookies = new Cookies();
   const isLogin = () => {
-    if (localStorage.getItem("state") === null) { return false };
+    if (cookies.get('state') == null) { return false };
 
-   return true
+   return true;
   }
 
   const [signedin, signin] = useState(isLogin());
@@ -19,7 +21,7 @@ function Header() {
     // .then(res => {
       // if (res.status === 202) {
         signin(!signedin);
-        localStorage.removeItem('state');
+        cookies.remove('state');
         console.log('User logged out.');  
         window.location.assign("/");      
       // } else {

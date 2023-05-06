@@ -123,28 +123,6 @@ function Login() {
         }
     };
 
-    const CallBack = (e) => {
-      axios.get(`http://localhost:5000/callback`, {
-          headers: {
-              "Access-Control-Allow-Headers": "Content-Type",
-          },
-      })
-          .then((res) => {
-              console.log(res)
-              // setCookie('state', res.data.state, { path: '/' })
-
-              cookies.set('state', res.data.state, { path: '/' });
-              // cookies.get('myCat')
-
-              localStorage.setItem('state', (res.data.state));
-              window.location.assign(res.data.auth_url)
-              window.dispatchEvent(new Event("loggedin"));
-          })
-          .catch((err) => console.log(err));
-      return () => {
-      }
-  };
-
     const handleToggle = () => {
         if (type === 'password') {
             setIcon(eye);
