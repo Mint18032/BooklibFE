@@ -19,19 +19,20 @@ function Reading() {
   // const cookies = Cookies();
 
   const upLoadBookMark = async (e) => {
-    axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=bookmark`, {
-      "book_id": book_id,
-      "line_pos": scrollPosition}, {
-     
-  })
-    .then(function (response) {
-      console.log(response);
+    if (scrollPosition != 0) {
+      // console.log("check:", scrollPosition)
+      axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=bookmark`, {
+        "book_id": book_id,
+        "line_pos": scrollPosition}, {
       
-     
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      })
+      .then(function (response) {
+        // console.log(response);
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+    }
   }
 
   useEffect(() => {
@@ -44,7 +45,7 @@ function Reading() {
   }, [upLoadBookMark]);
   const fetchBook = async () => {
     
-    let res;
+  let res;
   res = await axios.get(`http://localhost:5000/books/?book_id=${book_id}`, {
       
       headers: {
@@ -52,9 +53,10 @@ function Reading() {
         'Content-Type': 'application/json'
       },
     })
+    // console.log("res:", res.data)
      
         if (res.status === 203) {
-          nav("/login")
+          nav("/login") 
         }
         else {
           setData(res.data)
@@ -62,7 +64,7 @@ function Reading() {
   }
 
   const fetchBookmark = async() => {
-    let res; res = await axios.get(`http://localhost:5000/my_bookmark?book_id=${book_id}&bm_name=aaa`, {
+    let res; res = await axios.get(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&book_id=${book_id}&bm_name=bookmark`, {
       params: { 'state': localStorage.getItem('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -70,11 +72,12 @@ function Reading() {
       },
     })
       
+    // console.log("he", res.data[0].line_position)
         if (res.status === 203) {
           nav("/login")
         }
         else {
-          console.log(res.data)
+          //console.log(res.data)
         await setbookMark(res.data[0])
         setbookNote(res.data[1])
         // const res3= localStorage.setItem('text', (res.data[1].content))
@@ -94,8 +97,8 @@ function Reading() {
 
   const handleScroll = () => {
       const position = window.pageYOffset;
-    setScrollPosition(position);
-    console.log(position)
+      setScrollPosition(position);
+      // console.log(position)
   };
 
    
@@ -109,7 +112,7 @@ function Reading() {
     <div className='reading-view'>
       <ScrollTo>
         {({ scroll }) => (
-          <a class="tooltiplink" onClick={() => scroll({ x: 20, y: bookMark.line_position })} data-title="Đi tới chỗ đang đọc"><div className="bookmark"></div></a>
+          <a class="tooltiplink" onClick={() => {scroll({ x: 20, y: bookMark.line_position}); console.log("he", bookMark.line_position)} } data-title="Đi tới chỗ đang đọc"><div className="bookmark"></div></a>
         )}
       </ScrollTo>
         <h1>{data.title}</h1>

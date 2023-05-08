@@ -21,13 +21,9 @@ function Notes(props) {
 
   // add new note to the state array
   const saveHandler = async (e) => {
-    axios.post(`http://w22g7.int3306.freeddns.org/my_bookmark?state=${localStorage.getItem('state')}&bm_name=note`, {
-      
+    axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=note`, {
         "book_id": book_id,
-        
-        
         "content": inputText
-    
       }, {
      
   })
@@ -47,16 +43,28 @@ function Notes(props) {
   //apply the save and get functions using useEffect
   //get the saved notes and add them to the array
   useEffect(() => {
-    const data = props.content? props.content:localStorage.getItem('text');
-    console.log(data)
-    if (data) {
-      setInputText(data);
-    }
+    // const data = props.content? props.content:localStorage.getItem('text');
+    // console.log(data)
+    // if (data) {
+    //   setInputText(data);
+    // }
+    const fetchData = async () => {
+    let res = await axios.get(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&book_id=${book_id}&bm_name=note`, {
+      params: { 'state': localStorage.getItem('state') },
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        'Content-Type': 'application/json'
+      },
+    })
+    console.log("data", res.data[1].content)
+    setInputText(res.data[1].content);
+  }
+  fetchData();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('text', inputText);
-  }, [inputText]);
+  // useEffect(() => {
+  //   localStorage.setItem('text', inputText);
+  // }, [inputText]);
 
   //saving data to local storage
  
