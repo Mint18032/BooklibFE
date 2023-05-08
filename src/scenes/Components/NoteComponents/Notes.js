@@ -16,7 +16,7 @@ function Notes(props) {
   // get text and store in state
   const textHandler = (e) => {
     setInputText(e.target.value);
-    
+    localStorage.setItem('text', e.target.value);
   };
 
   // add new note to the state array
@@ -53,6 +53,10 @@ function Notes(props) {
       setInputText(data);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('text', inputText);
+  }, [inputText]);
 
   //saving data to local storage
  

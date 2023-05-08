@@ -9,7 +9,6 @@ import Notes from "./Components/NoteComponents/Notes";
 import React from "react";
 import { ScrollTo } from "react-scroll-to";
 import { Helmet } from 'react-helmet';
-import { Cookies } from 'react-cookie';
 
 function Reading() {
   const nav = useNavigate();
