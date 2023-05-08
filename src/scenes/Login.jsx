@@ -7,72 +7,9 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import Cookies from 'universal-cookie';
 
-// function Login() {
-//     const [username, setUsername] = useState();
-//     const [password, setPassword] = useState();
-//     const cookies = new Cookies();
-  
-//     const handleSubmit = (e) => {
-//       // Prevent the default submit and page reload
-//       e.preventDefault();
-  
-//       // Handle validations
-//       axios
-//         .post("http://localhost:5000/login", { username, password })
-//         .then((res) => {
-//           console.log(res);
-//           // setCookie('state', res.data.state, { path: '/' })
-//           cookies.set("state", res.data.user, { path: "/" });
-//           // cookies.get('myCat')
-  
-//           localStorage.setItem("state", res.data.user);
-//           window.location.assign(res.data.url);
-//           window.dispatchEvent(new Event("loggedin"));
-//         })
-//         .catch((err) => console.log(err));
-//       return () => {};
-//     };
-  
-    
-//     return (
-//       <div>
-//         <form action="" id="login" method="post" onSubmit={handleSubmit}>
-//           <h1>Login</h1>
-//           <p className="field">
-//             <label for="Username"> Username </label>
-//             <input
-//               type="username"
-//               name="username"
-//               id="username"
-//               value={username}
-//               onChange={(e) => setUsername(e.target.value)}
-//             />
-//           </p>
-//           <p className="item">
-//             <label for="password"> Password </label>
-//             <input
-//               type="password"
-//               name="password"
-//               id="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//             />
-//           </p>
-//           <p className="item">
-//             <input type="submit" value="Login" />
-//           </p>
-//         </form>
-//       </div>
-//     );
-//   }
-  
-//   export default Login;
 
 function Login() {
     // let nav = useNavigate()
-    // const [cookies, setCookie] = useCookies('state')
-    // const [username, setUsername] = useState();
-    // const [type, setType] = useState('password');
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [type, setType] = useState('password');
@@ -154,7 +91,7 @@ function Login() {
                     </div>
                     <div className="field">
                     <input
-                        type={password}
+                        type={'password'}
                         id="password"
                         className="item input"
                         name="password"
@@ -163,7 +100,7 @@ function Login() {
                         defaultValue=""
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <span onClick={handleToggle}><Icon icon={icon} size={20}/></span>
+                    {/* <span onClick={handleToggle}><Icon icon={icon} size={20}/></span> */}
                     </div>
                     <button type="submit" className="item button is-signin">
                     Đăng nhập
