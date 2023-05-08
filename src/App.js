@@ -15,6 +15,10 @@ import Reading from "./scenes/Reading";
 import Accounts from "./scenes/Accounts"; // TODO: fix
 import Author from "./scenes/Author";
 import DeleteBook from "./scenes/deletebook";
+import { Cookies } from 'react-cookie';
+
+const cookies = new Cookies();
+
 function App() {
   const [theme, colorMode] = useMode();  
 

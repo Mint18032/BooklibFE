@@ -174,8 +174,8 @@ function Login() {
                     Đăng nhập Google
                     </button>
                 </div>
-                <p className="has-text-grey has-text-right">
-                    <a href="./register">Đăng ký</a>
+                <p className="has-text-grey"> Chưa có tài khoản? 
+                    <a href="./register"> Đăng ký</a>
                 </p>
                 </div>
             </form>

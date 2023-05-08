@@ -36,7 +36,8 @@ a.rating-stars:hover {
 div.comment-section {
     background-color: #07234d;
     padding: 2vw;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
+    margin-bottom: -48px;
 }
 
 .bookDetails {

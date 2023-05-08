@@ -9,13 +9,15 @@ import Notes from "./Components/NoteComponents/Notes";
 import React from "react";
 import { ScrollTo } from "react-scroll-to";
 import { Helmet } from 'react-helmet';
+import { Cookies } from 'react-cookie';
 
 function Reading() {
-  const nav = useNavigate( )
-  const { book_id } = useParams()
+  const nav = useNavigate();
+  const { book_id } = useParams();
   const [data, setData] = useState([]);
-  const [bookMark, setbookMark] = useState([])
-  const [note, setbookNote] = useState([])
+  const [bookMark, setbookMark] = useState([]);
+  const [note, setbookNote] = useState([]);
+  // const cookies = Cookies();
 
   const upLoadBookMark = async (e) => {
     axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=bookmark`, {

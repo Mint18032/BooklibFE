@@ -15,11 +15,12 @@ import { storage } from "../../firebase";
 import { v4 } from "uuid";
 import axios from "axios"
 import Alert from '@mui/material/Alert';
+import { Cookies } from 'react-cookie';
 
 
 const Form = () => {
-  const [success, setSucess] = useState(false)
-
+  const [success, setSucess] = useState(false);
+  const cookies = new Cookies();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
@@ -52,7 +53,7 @@ const ITEM_PADDING_TOP = 8;
   };
   function fetchUser() {
     axios.get("http://localhost:5000/my_account", {
-      params: { 'state': localStorage.getItem('state') },
+      params: { 'state': cookies.get('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -78,7 +79,7 @@ const ITEM_PADDING_TOP = 8;
   }, [])
   const handleFormSubmit = async(e) => {
     console.log(e)
-    axios.post(`http://localhost:5000/books/?state=${localStorage.getItem('state')}`, {
+    axios.post(`http://localhost:5000/books/?state=${cookies.get('state')}`, {
       "title": e.title,
       "page_count": e.page_count,
       "public_year": e.public_year,

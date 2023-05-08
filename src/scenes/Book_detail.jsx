@@ -21,6 +21,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import { useCallback } from "react";
+import { Cookies } from 'react-cookie';
 
 function BookDetail() {
   const [data, setData] = useState([]);
@@ -34,6 +35,7 @@ function BookDetail() {
   const [starCount, countStar] = useState([]);
   const { register, handleSubmit } = useForm();
   let nav = useNavigate();
+  const cookies = new Cookies();
 
   const updateCollection = async (e) => {
     console.log(e);
@@ -41,7 +43,7 @@ function BookDetail() {
       .post(
         `http://localhost:5000/my_collections/${
           e.name
-        }?state=${localStorage.getItem("state")}`,
+        }?state=${cookies.get("state")}`,
         {
           books: [auth_id],
         },
@@ -105,7 +107,7 @@ function BookDetail() {
 
   function fetchUser() {
     axios.get("http://localhost:5000/my_account", {
-      params: { 'state': localStorage.getItem('state') },
+      params: { 'state': cookies.get('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -117,7 +119,7 @@ function BookDetail() {
         }
         else {
           setAvt(res.data.profile_pic !== null ? res.data.profile_pic : "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg");
-          console.log(avt);
+          console.log(avt.toString());
         }
       })
       .catch((err) => console.log(err));
@@ -144,7 +146,7 @@ function BookDetail() {
     }
     axios
       .post(
-        `http://localhost:5000/my_ratings?state=${localStorage.getItem(
+        `http://localhost:5000/my_ratings?state=${cookies.get(
           "state"
         )}`,
         {
@@ -382,7 +384,7 @@ function BookDetail() {
                         <div className="d-flex flex-start">
                           <img
                             className="rounded-circle shadow-1-strong me-3"
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                            src="https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg"
                             alt="avatar"
                             width="65"
                             height="65"

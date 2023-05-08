@@ -7,6 +7,7 @@ import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router-dom';
 import {useRef} from 'react';
 import { Helmet } from 'react-helmet';
+import { Cookies } from 'react-cookie';
 
 const HomePage = (props) => {
   const ref = useRef(null);
@@ -23,10 +24,7 @@ const HomePage = (props) => {
   const [max_rating, setmax_rating] = useState(5)
   const [min_pages, setmin_pages] = useState(0)
   const [max_pages, setmax_pages] = useState(10000)
-
-  
-
-  
+  const cookies = new Cookies();
   const nav = useNavigate()
   
   
@@ -67,7 +65,7 @@ const HomePage = (props) => {
 
   const filterItem = async (e) => {
     
-  const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
+  const res = await axios.get(`http://localhost:5000/books/filter?state=${cookies.get('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
     
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -85,7 +83,7 @@ const HomePage = (props) => {
   const filterItem0 = async (e) => {
     const _genre = e.target.value
     setgenres(_genre)
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${_genre}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${cookies.get('state')}&genres=${_genre}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
     
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
@@ -131,7 +129,7 @@ const HomePage = (props) => {
       _maxYear = 3000
     }
     
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${_minYear}&max_year=${_maxYear}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${cookies.get('state')}&genres=${genres}&min_year=${_minYear}&max_year=${_maxYear}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${min_rating}&max_rating=${max_rating}`, {
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -174,7 +172,7 @@ const HomePage = (props) => {
       _maxPage = 10000
     }
 
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${_minPage}&max_pages=${_maxPage}&min_rating=${min_rating}&max_rating=${max_rating}`, {
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${cookies.get('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${_minPage}&max_pages=${_maxPage}&min_rating=${min_rating}&max_rating=${max_rating}`, {
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
@@ -217,7 +215,7 @@ const HomePage = (props) => {
       _maxRating = 5
     }
 
-    const res = await axios.get(`http://localhost:5000/books/filter?state=${localStorage.getItem('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${_minRating}&max_rating=${_maxRating}`, {
+    const res = await axios.get(`http://localhost:5000/books/filter?state=${cookies.get('state')}&genres=${genres}&min_year=${min_year}&max_year=${max_year}&min_pages=${min_pages}&max_pages=${max_pages}&min_rating=${_minRating}&max_rating=${_maxRating}`, {
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
