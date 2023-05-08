@@ -7,7 +7,10 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import Cookies from 'universal-cookie';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b82469a1f40fa6e60d2ba1a7e8a6882928af696
 function Login() {
     // let nav = useNavigate()
     const [username, setUsername] = useState();
@@ -33,7 +36,10 @@ function Login() {
                 window.location.assign(res.data.url);
                 window.dispatchEvent(new Event("loggedin"));
               })
-              .catch((err) => console.log(err));
+              .catch((err) => {
+                console.log(err);
+                alert("Đăng nhập không thành công. Tài khoản hoặc mật khẩu không đúng.");
+            });
             return () => {};
     };
 
