@@ -19,6 +19,8 @@ Bài tập lớn môn Hệ quản trị cơ sở dữ liệu.
 
 ## Một số tính năng người dùng
 
+[Demo Video](./public/assets/booklibdemo.mp4)
+
 ### Đăng nhập, đăng xuất
 
 Đăng nhập qua tài khoản Google. Tài khoản của Admin sẽ được chuyển sang giao diện Admin sau đăng nhập.
