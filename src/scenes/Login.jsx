@@ -7,12 +7,7 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import Cookies from 'universal-cookie';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9b82469a1f40fa6e60d2ba1a7e8a6882928af696
 function Login() {
-    // let nav = useNavigate()
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [type, setType] = useState('password');
@@ -20,7 +15,6 @@ function Login() {
     const cookies = new Cookies();
 
     const handleSubmit = (e) => {
-            // Prevent the default submit and page reload
             e.preventDefault();
         
             // Handle validations
@@ -38,7 +32,7 @@ function Login() {
               })
               .catch((err) => {
                 console.log(err);
-                alert("Đăng nhập không thành công. Tài khoản hoặc mật khẩu không đúng.");
+                alert("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại.");
             });
             return () => {};
     };
@@ -85,7 +79,7 @@ function Login() {
                     <div className="field">
                     <div className="field">
                     <input
-                        type={username}
+                        type='text'
                         id="username"
                         className="item input"
                         name="username"
@@ -97,7 +91,7 @@ function Login() {
                     </div>
                     <div className="field">
                     <input
-                        type={'password'}
+                        type={type}
                         id="password"
                         className="item input"
                         name="password"
@@ -106,7 +100,7 @@ function Login() {
                         defaultValue=""
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {/* <span onClick={handleToggle}><Icon icon={icon} size={20}/></span> */}
+                    <span onClick={handleToggle}><Icon icon={icon} size={20}/></span>
                     </div>
                     <button type="submit" className="item button is-signin">
                     Đăng nhập

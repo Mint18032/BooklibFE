@@ -346,7 +346,7 @@ const Account = (props) => {
                   defaultValue={user.bio}
                   {...register('bio')}
                 />
-                <label htmlFor="floatingInputGrid"> Giới thiệu</label>
+                <p htmlFor="floatingInputGrid"> Giới thiệu</p>
               </div>
               <div className="form-floating mb-3">
                 <input

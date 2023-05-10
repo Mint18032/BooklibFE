@@ -230,7 +230,7 @@ function BookDetail() {
                 />
                 &nbsp;
                 <div className="average-rating-point">
-                  {starCount[0] > 0 ? starCount[0] : "0"}
+                  {starCount[0] > 0 ? starCount[0].toFixed(1) : "0"}
                 </div>
               </div>
               <br />
