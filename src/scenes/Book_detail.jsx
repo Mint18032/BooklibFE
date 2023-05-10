@@ -25,7 +25,7 @@ import { Cookies } from 'react-cookie';
 
 function BookDetail() {
   const [data, setData] = useState([]);
-  const [avt, setAvt] = useState();
+  const [profile, setProfile] = useState({});
   const { auth_id } = useParams();
   const [genre, setGenre] = useState([]);
   const [author, setAuthor] = useState([]);
@@ -118,8 +118,11 @@ function BookDetail() {
           nav("/login");
         }
         else {
-          setAvt(res.data.profile_pic !== null ? res.data.profile_pic : "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg");
-          console.log(avt.toString());
+          setProfile({
+            avt : res.data.profile_pic !== null ? res.data.profile_pic : "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg",
+            username : res.data.username
+          });
+          console.log(profile.toString());
         }
       })
       .catch((err) => console.log(err));
@@ -384,7 +387,7 @@ function BookDetail() {
                         <div className="d-flex flex-start">
                           <img
                             className="rounded-circle shadow-1-strong me-3"
-                            src="https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg"
+                            src={details.username === profile.username ? profile.avt : "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg"}
                             alt="avatar"
                             width="65"
                             height="65"
@@ -463,7 +466,7 @@ function BookDetail() {
                       <div className="d-flex flex-start w-200">
                         <MDBCardImage
                           className="rounded-circle shadow-1-strong me-3"
-                          src={avt}
+                          src={profile.avt}
                           alt="avatar"
                           width="65"
                           height="65"

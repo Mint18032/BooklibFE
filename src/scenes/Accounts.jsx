@@ -175,8 +175,8 @@ const Account = (props) => {
             <div className="p-3">
 
               <img
-                src={user.profile_pic ?? "https://i.pinimg.com/736x/6a/29/8d/6a298df72cb446bdf65891b846374079.jpg"}
-                className="w-100"
+                src={user.profile_pic ?? "https://i.pinimg.com/736x/cc/67/b0/cc67b05deb2f4490daa287a533b0890e.jpg"}
+                className="w-100 rounded"
                 alt=''
               />
             </div>
