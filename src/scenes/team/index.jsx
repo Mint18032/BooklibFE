@@ -8,10 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import "../../index.css";
 import Sidebar from "../../scenes/global/Sidebar";
-import SearchIcon from "@mui/icons-material/Search";
 import Alert from "@mui/material/Alert";
 import Cookies from "universal-cookie";
-import { v4 as uuidv4 } from "uuid";
 
 const Team = (props) => {
   const [success, setSucess] = useState(false);
@@ -196,6 +194,7 @@ const Team = (props) => {
               </Typography>
             </Box>
             <Box
+              onClick={(e) => Ban100(e)}
               width="20%"
               m="0 auto"
               p="5px"

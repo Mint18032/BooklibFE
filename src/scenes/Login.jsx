@@ -2,10 +2,10 @@ import React from 'react';
 import '../styles/general.css';
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import Cookies from 'universal-cookie';
+import Icon from 'react-icons-kit';
 
 function Login() {
     const [username, setUsername] = useState();

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import "../css/Note.css";
 import CreateNote from "./CreateNote";
-import Note from "./Note";
-import { v4 as uuid } from "uuid";
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Cookies } from "react-cookie";
 
 function Notes(props) {
   //states
   const { book_id } = useParams()
 
   const [inputText, setInputText] = useState("");
+  const cookies = new Cookies();
 
   // get text and store in state
   const textHandler = (e) => {
@@ -21,7 +20,7 @@ function Notes(props) {
 
   // add new note to the state array
   const saveHandler = async (e) => {
-    axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=note`, {
+    axios.post(`http://localhost:5000/my_bookmark?state=${cookies.get('state')}&bm_name=note`, {
         "book_id": book_id,
         "content": inputText
       }, {
@@ -49,7 +48,7 @@ function Notes(props) {
     //   setInputText(data);
     // }
     const fetchData = async () => {
-    let res = await axios.get(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&book_id=${book_id}&bm_name=note`, {
+    let res = await axios.get(`http://localhost:5000/my_bookmark?state=${cookies.get('state')}&book_id=${book_id}&bm_name=note`, {
       params: { 'state': localStorage.getItem('state') },
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",

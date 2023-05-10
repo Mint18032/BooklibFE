@@ -19,7 +19,7 @@ function Reading() {
   // const cookies = Cookies();
 
   const upLoadBookMark = async (e) => {
-    if (scrollPosition != 0) {
+    if (scrollPosition !== 0) {
       // console.log("check:", scrollPosition)
       axios.post(`http://localhost:5000/my_bookmark?state=${localStorage.getItem('state')}&bm_name=bookmark`, {
         "book_id": book_id,

@@ -92,11 +92,7 @@ const ITEM_PADDING_TOP = 8;
           "genre1",
           "genre2"
       ],
-      "authors": [
-          1,
-          3,
-          4
-      ]
+      "authors": e.author,
   }, )
   .then(function (response) {
     console.log(response.data);
@@ -260,7 +256,7 @@ const ITEM_PADDING_TOP = 8;
                   </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained" >
-                Create New User
+                Create New Book
               </Button>
             </Box>
           </form>
